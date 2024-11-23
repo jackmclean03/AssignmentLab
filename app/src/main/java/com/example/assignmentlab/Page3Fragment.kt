@@ -33,11 +33,13 @@ class Page3Fragment : Fragment() {
                 val file = File(context?.getExternalFilesDir(null), "notes.txt")
                 val fileInput = FileInputStream(file)
                 val inputStream = InputStreamReader(fileInput)
-                val inputBuffer = CharArray(128)
+                val inputBuffer = CharArray(2000)
                 inputStream.read(inputBuffer)
                 val inputString = String(inputBuffer)
                 val textView = v.findViewById<TextView>(R.id.textView2)
                 textView.text = "$inputString"
+                val stringArray = inputString.split("\n\n").toTypedArray()
+                stringArray.forEach { println(it) }
                 inputStream.close()
                 fileInput.close()
 
