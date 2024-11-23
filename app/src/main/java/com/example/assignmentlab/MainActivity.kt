@@ -22,10 +22,11 @@ class MainActivity : AppCompatActivity() {
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_page2))
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         val viewPager = findViewById<ViewPager2>(R.id.pager)
-        val adapter = PageAdapter(this,2)
+        val adapter = PageAdapter(this, 3)
         viewPager.setAdapter(adapter)
-        TabLayoutMediator(tabLayout, viewPager) {
-                tab, position -> tab.text = "Page " + (position + 1) }.attach()
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = "Page " + (position + 1)
+        }.attach()
     }
 
 }
