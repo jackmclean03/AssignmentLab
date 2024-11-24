@@ -7,11 +7,23 @@
     android:background="#37FFC107">
 
     <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="24dp"
+        android:text="Add Your Note"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="192dp"
         android:text=""
         android:textColor="#000000"
         android:textSize="20sp"
@@ -22,11 +34,12 @@
         android:id="@+id/editNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="256dp"
         android:ems="10"
         android:inputType="text"
         android:text="Type your note here"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,8 +47,8 @@
         android:id="@+id/clearTextBut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="88dp"
         android:text="Clear Text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="252dp"
+        android:layout_marginTop="88dp"
         android:text="Add Note"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

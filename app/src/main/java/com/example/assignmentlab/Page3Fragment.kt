@@ -18,6 +18,7 @@ import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Date
 import java.util.Locale
 
 class Page3Fragment : Fragment() {
@@ -30,6 +31,7 @@ class Page3Fragment : Fragment() {
         } ?: throw Exception("Invalid Activity")
         val v = inflater.inflate(R.layout.page3_fragment, container, false)
         val textView = v.findViewById<TextView>(R.id.textView2)
+        val supportFragmentManager = requireActivity().supportFragmentManager
 
         fun getFile(): String? {
             val storageState = Environment.getExternalStorageState()
@@ -46,7 +48,6 @@ class Page3Fragment : Fragment() {
                     return inputString
                 }
             } else {
-                val textView = v.findViewById<TextView>(R.id.textView2)
                 textView.text = "Notes are empty"
             }
             return "Notes are empty"
