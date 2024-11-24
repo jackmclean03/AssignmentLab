@@ -29,9 +29,9 @@ class Page3Fragment : Fragment() {
             ViewModelProvider(this)[MyViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
         val v = inflater.inflate(R.layout.page3_fragment, container, false)
+        val textView = v.findViewById<TextView>(R.id.textView2)
 
-        fun sortNewestToOldest() {
-
+        fun getFile(): String? {
             val storageState = Environment.getExternalStorageState()
             if (storageState == Environment.MEDIA_MOUNTED || storageState == Environment.MEDIA_MOUNTED_READ_ONLY) {
                 val file = File(context?.getExternalFilesDir(null), "notes.txt")
@@ -41,77 +41,62 @@ class Page3Fragment : Fragment() {
                     val inputBuffer = CharArray(2000)
                     val readLength = inputStream.read(inputBuffer)
                     val inputString = String(inputBuffer, 0, readLength)
-                    val textView = v.findViewById<TextView>(R.id.textView2)
-
-                    val stringArray = inputString.split("\n\n").filter { it.isNotBlank() }
-                    val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.UK)
-
-                    val sortedNotes = stringArray.sortedByDescending { note ->
-                        val dateString = note.substringBefore("\n").trim()
-                        LocalDate.parse(dateString, dateFormatter)
-                    }
-
-                    textView.text = "$sortedNotes"
+                    inputStream.close()
+                    fileInput.close()
+                    return inputString
                 }
             } else {
                 val textView = v.findViewById<TextView>(R.id.textView2)
                 textView.text = "Notes are empty"
             }
+            return "Notes are empty"
+        }
+
+        fun sortNewestToOldest() {
+            val inputString = getFile()
+
+            val stringArray = inputString?.split("\n\n")?.filter { it.isNotBlank() }
+            val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.UK)
+
+            val sortedNotes = stringArray?.sortedByDescending { note ->
+                val dateString = note.substringBefore("\n").trim()
+                LocalDate.parse(dateString, dateFormatter)
+            }
+
+            val stringNotes = sortedNotes?.joinToString()
+            val formattedString = stringNotes?.replace(",", "\n\n")
+            println(formattedString)
+
+            textView.text = "$formattedString"
         }
 
         fun sortOldestToNewest() {
-            val storageState = Environment.getExternalStorageState()
-            if (storageState == Environment.MEDIA_MOUNTED || storageState == Environment.MEDIA_MOUNTED_READ_ONLY) {
-                val file = File(context?.getExternalFilesDir(null), "notes.txt")
-                if (file.exists() && file.length() > 0) {
-                    val fileInput = FileInputStream(file)
-                    val inputStream = InputStreamReader(fileInput)
-                    val inputBuffer = CharArray(2000)
-                    val readLength = inputStream.read(inputBuffer)
-                    val inputString = String(inputBuffer, 0, readLength)
-                    val textView = v.findViewById<TextView>(R.id.textView2)
+            val inputString = getFile()
 
-                    val stringArray = inputString.split("\n\n").filter { it.isNotBlank() }
-                    val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.UK)
+            val stringArray = inputString?.split("\n\n")?.filter { it.isNotBlank() }
+            val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.UK)
 
-                    val sortedNotes = stringArray.sortedBy { note ->
-                        val dateString = note.substringBefore("\n").trim()
-                        LocalDate.parse(dateString, dateFormatter)
-                    }
-
-                    textView.text = "$sortedNotes"
-                } else {
-                    val textView = v.findViewById<TextView>(R.id.textView2)
-                    textView.text = "Notes are empty"
-                }
+            val sortedNotes = stringArray?.sortedBy { note ->
+                val dateString = note.substringBefore("\n").trim()
+                LocalDate.parse(dateString, dateFormatter)
             }
 
+            val stringNotes = sortedNotes?.joinToString()
+            val formattedString = stringNotes?.replace(",", "\n\n")
+            println(formattedString)
+
+            textView.text = "$formattedString"
         }
+
 
         fun displaySDNotes() {
-            val storageState = Environment.getExternalStorageState()
-            if (storageState == Environment.MEDIA_MOUNTED || storageState == Environment.MEDIA_MOUNTED_READ_ONLY) {
-                val file = File(context?.getExternalFilesDir(null), "notes.txt")
-                if (file.exists() && file.length() > 0) {
-                    val fileInput = FileInputStream(file)
-                    val inputStream = InputStreamReader(fileInput)
-                    val inputBuffer = CharArray(2000)
-                    val readLength = inputStream.read(inputBuffer)
-                    val inputString = String(inputBuffer, 0, readLength)
-                    val textView = v.findViewById<TextView>(R.id.textView2)
-                    textView.text = "$inputString"
-
-                    inputStream.close()
-                    fileInput.close()
-                } else {
-                    val textView = v.findViewById<TextView>(R.id.textView2)
-                    textView.text = "Notes are empty"
-                }
-
-            }
+            val inputString = getFile()
+            textView.text = "$inputString"
         }
 
-        v.findViewById<Button>(R.id.clearSDNoteBut).setOnClickListener() {
+
+        v.findViewById<Button>(R.id.clearSDNoteBut).setOnClickListener()
+        {
             val storageState = Environment.getExternalStorageState()
             if (storageState == Environment.MEDIA_MOUNTED) {
                 val file = File(context?.getExternalFilesDir(null), "notes.txt")
@@ -121,21 +106,23 @@ class Page3Fragment : Fragment() {
                 outputStream.flush()
                 outputStream.close()
                 fos.close()
-                val textView = v.findViewById<TextView>(R.id.textView2)
                 textView.text = "Notes are empty"
             }
 
         }
 
-        v.findViewById<Button>(R.id.displaySDNoteBut).setOnClickListener() {
+        v.findViewById<Button>(R.id.displaySDNoteBut).setOnClickListener()
+        {
             displaySDNotes()
         }
 
-        v.findViewById<Button>(R.id.sortNewestBut).setOnClickListener() {
+        v.findViewById<Button>(R.id.sortNewestBut).setOnClickListener()
+        {
             sortNewestToOldest()
         }
 
-        v.findViewById<Button>(R.id.sortOldestBut).setOnClickListener() {
+        v.findViewById<Button>(R.id.sortOldestBut).setOnClickListener()
+        {
             sortOldestToNewest()
         }
 
