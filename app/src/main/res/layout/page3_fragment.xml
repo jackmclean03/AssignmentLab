@@ -21,8 +21,8 @@
                 android:id="@+id/clearSDNoteBut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
                 android:text="Clear Notes"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -31,9 +31,29 @@
                 android:id="@+id/displaySDNoteBut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="224dp"
-                android:layout_marginTop="24dp"
-                android:text="Display Notes"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="16dp"
+                android:text="Refresh Notes"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/sortNewestBut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="80dp"
+                android:text="Sort: Newest"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/sortOldestBut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="80dp"
+                android:text="Sort: Oldest"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,12 +61,12 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="160dp"
                 android:text=""
                 android:textColor="#000000"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintStart_toStartOf="@id/sortNewestBut"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
