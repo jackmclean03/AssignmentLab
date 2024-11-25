@@ -37,6 +37,7 @@ class Page2Fragment : Fragment() {
         val valueObserver = Observer<String> { newValue ->
             valueView.text = newValue.toString()
         }
+        viewModel.value.observe(viewLifecycleOwner, valueObserver)
         val noteValue = v.findViewById<EditText>(R.id.editNote)
         v.findViewById<Button>(R.id.clearTextBut).setOnClickListener() {
             noteValue.setText("")
@@ -49,12 +50,12 @@ class Page2Fragment : Fragment() {
         fun checkNoteLimit(): Boolean {
             val limit = 20
             val storageState = Environment.getExternalStorageState()
-            if (storageState == Environment.MEDIA_MOUNTED || storageState == Environment.MEDIA_MOUNTED_READ_ONLY) {
+            if (storageState == Environment.MEDIA_MOUNTED) {
                 val file = File(context?.getExternalFilesDir(null), "notes.txt")
                 if (file.exists() && file.length() > 0) {
                     val fileInput = FileInputStream(file)
                     val inputStream = InputStreamReader(fileInput)
-                    val inputBuffer = CharArray(2000)
+                    val inputBuffer = CharArray(10000)
                     val readLength = inputStream.read(inputBuffer)
                     val inputString = String(inputBuffer, 0, readLength)
                     val noteArray = inputString?.split("\n\n")?.filter { it.isNotBlank() }
@@ -126,7 +127,6 @@ class Page2Fragment : Fragment() {
             }
 
         }
-        viewModel.value.observe(viewLifecycleOwner, valueObserver)
         return v;
     }
 }

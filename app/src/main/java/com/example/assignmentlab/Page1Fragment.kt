@@ -30,10 +30,7 @@ class Page1Fragment : Fragment() {
             val dateFragment = DatePickerFragment()
             dateFragment.show(supportFragmentManager, "datePicker")
         }
-        supportFragmentManager.setFragmentResultListener(
-            "REQUEST_KEY",
-            viewLifecycleOwner
-        ) { resultKey, bundle ->
+        supportFragmentManager.setFragmentResultListener("REQUEST_KEY", viewLifecycleOwner) { resultKey, bundle ->
             if (resultKey == "REQUEST_KEY") {
                 val date = bundle.getString("REQUEST_CODE")
                 viewModel.value.setValue(date)

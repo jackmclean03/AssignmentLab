@@ -35,7 +35,7 @@ class Page3Fragment : Fragment() {
 
         fun getFile(): String? {
             val storageState = Environment.getExternalStorageState()
-            if (storageState == Environment.MEDIA_MOUNTED || storageState == Environment.MEDIA_MOUNTED_READ_ONLY) {
+            if (storageState == Environment.MEDIA_MOUNTED) {
                 val file = File(context?.getExternalFilesDir(null), "notes.txt")
                 if (file.exists() && file.length() > 0) {
                     val fileInput = FileInputStream(file)
@@ -66,7 +66,6 @@ class Page3Fragment : Fragment() {
 
             val stringNotes = sortedNotes?.joinToString()
             val formattedString = stringNotes?.replace(",", "\n\n")
-            println(formattedString)
 
             textView.text = "$formattedString"
         }
