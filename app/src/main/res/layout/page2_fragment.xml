@@ -32,12 +32,12 @@
 
     <EditText
         android:id="@+id/editNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="345dp"
+        android:layout_height="174dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="256dp"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         android:text="Type your note here"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
